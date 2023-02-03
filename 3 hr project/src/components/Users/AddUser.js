@@ -37,13 +37,19 @@ const AddUser = (props) => {
   const ageChangeHandler = (event) => {
     setEntereredAge(event.target.value);
   };
-  const errorHandler=()=>{
+  const errorHandler = () => {
     setError(null);
-  }
+  };
 
   return (
-    <div>
-      {error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler}/>}
+    <React.Fragment>
+      {error && (
+        <ErrorModal
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
@@ -63,7 +69,7 @@ const AddUser = (props) => {
           <Button type="submit">Add User</Button>
         </form>
       </Card>
-    </div>
+      </React.Fragment>
   );
 };
 
