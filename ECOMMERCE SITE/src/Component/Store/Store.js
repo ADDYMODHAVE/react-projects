@@ -41,7 +41,7 @@ const Store = () => {
     <div className="row justify-content-evenly">
       {productsArr.map((item) => {
         return (
-          <div className="col-md-5  mt-4">
+          <div key={Math.random()} className="col-md-5  mt-4">
             <Card
               title={item.title}
               imageUrl={item.imageUrl}

@@ -13,6 +13,7 @@
 .image {
   width: 50%;
   background-size: cover;
+  border-radius: 8px;
 }
 #price {
   font-weight: 500;
