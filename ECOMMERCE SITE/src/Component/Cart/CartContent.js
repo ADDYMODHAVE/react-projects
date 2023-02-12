@@ -1,51 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import Modal from "./Modal";
 import "./CartContent.css";
 import CartItem from "./CartItem";
-
-const cartElements = [
-  {
-    title: "Colors blue red black",
-    id: "e1",
-    price: 100,
-
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-
-    quantity: 2,
-  },
-
-  {
-    title: "Black and white Colors",
-    id: "e2",
-    price: 50,
-
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-
-    quantity: 3,
-  },
-
-  {
-    title: "Yellow and Black Colors",
-    id: "e3",
-    price: 70,
-
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-
-    quantity: 1,
-  },
-];
+import CartContext from "../Context/Cart-Context";
 
 const CartContent = (props) => {
+  
+  const ctx = useContext(CartContext);
 
-  const cartitem = cartElements.map((item) => {
+  const TotalAmountis = ctx.TotalAmount;
+
+  const cartItemRemoveHandler = (id) => {
+    ctx.removeItem(id);
+  };
+  const cartitem = ctx.items.map((item) => {
     return (
-      <div key={item.id} className="cartitem">
+      <React.Fragment  key={item.id}>
+      <div className="cartitem">
         <CartItem
+          id={item.id}
           imageUrl={item.imageUrl}
+          amount={item.amount}
           price={item.price}
           title={item.title}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
         />
       </div>
+      <hr></hr>
+      </React.Fragment>
     );
   });
 
@@ -59,7 +41,8 @@ const CartContent = (props) => {
               onClick={props.onremove}
               id="remove"
               className="btn btn-outline-danger"
-            >X
+            >
+              x
             </button>
           </div>
           <div className="cart">
@@ -68,6 +51,7 @@ const CartContent = (props) => {
             <h3 className="bordera">QUANTITY</h3>
           </div>
           {cartitem}
+          <h1 className="cart">Total Rs/{TotalAmountis}</h1>
         </div>
       </Modal>
     </div>
