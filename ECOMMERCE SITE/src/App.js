@@ -9,6 +9,8 @@ import Fotter from "./Component/Fotter/Fotter";
 import About from "./Component/About/About";
 import Home from "./Component/Home/Home";
 import Contact from "./Component/Contact/Contact";
+import { productsArr } from "./Component/Context/CartProvider";
+import ProDescription from "./Component/ProDes/ProDescription";
 
 function App() {
   const [cartdisplay, setcart] = useState(false);
@@ -29,7 +31,7 @@ function App() {
           <Route path="/" exact>
             <Redirect to="/store" />
           </Route>
-         <Route path="/home">
+          <Route path="/home">
             <Home />
           </Route>
           <Route path="/store">
@@ -39,9 +41,20 @@ function App() {
             <About />
           </Route>
           <Route path="/contact">
-          <Contact />
+            <Contact />
           </Route>
-          
+          {productsArr.map((item) => {
+            return (
+              <Route key={item.id} path={`/productdetails/${item.id}`}>
+                <ProDescription
+                  id={item.id}
+                  title={item.title}
+                  imageUrl={item.imageUrl}
+                  price={item.price}
+                />
+              </Route>
+            );
+          })}
         </Switch>
         <Fotter />
       </div>
