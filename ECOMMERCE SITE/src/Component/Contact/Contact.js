@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import "./Contact.css";
 
 const Contact = (props) => {
-    const history = useHistory();
-
-    const [focusing, setfocus] = useState(false);
+  const history = useHistory();
+  const [focusing, setfocus] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();

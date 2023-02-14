@@ -1,11 +1,10 @@
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import React, { useContext } from "react";
 import "./Header.css";
 import Cartbutton from "./Cartbutton";
 import AuthContext from "../Context/Auth-Context/Auth-Context";
 const Header = (props) => {
   const ctx = useContext(AuthContext);
-  const history = useHistory();
   const logedouthandler = () => {
     ctx.Logout();
     localStorage.removeItem("tokenid");

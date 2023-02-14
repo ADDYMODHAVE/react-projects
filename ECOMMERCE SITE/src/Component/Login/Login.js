@@ -28,10 +28,10 @@ const LogIn = () => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCtAB2ySpP41rMWn_UdbtdGgUXfepvS18I";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA";
     } else {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCtAB2ySpP41rMWn_UdbtdGgUXfepvS18I";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA";
     }
 
     fetch(url, {
@@ -44,33 +44,30 @@ const LogIn = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => {
+    }).then(async res => {
         setIsLoading(false);
         if (res.ok) {
-          emailItnputRef.current.value = "";
-          passwordInputRef.current.value = "";
+          emailItnputRef.current.value="";
+          passwordInputRef.current.value="";
           return res.json();
         } else {
-          return res.json().then((data) => {
+          const data = await res.json();
             let errmessage = "Authentication Failed";
             if (data && data.error && data.error.message) {
-              errmessage = data.error.message;
+                errmessage = data.error.message;
             }
             throw new Error(errmessage);
-          });
         }
       })
-      .then((data) => {
-        ctx.Login(data.idToken);
-        localStorage.setItem("tokenid", data.idToken);
-        history.replace("/");
-        setTimeout(() => {
+      .then(data=>{
+         ctx.Login(data.idToken);
+         localStorage.setItem("tokenid",data.idToken)
+         history.replace("/")
+         setTimeout(()=>{
           localStorage.removeItem("tokenid");
-          console.log("logedout with timer");
-        }, 300000);
-      })
-      .catch((err) => {
+          console.log("logedout with timer")
+         },300000)
+      }).catch((err) => {
         alert(err.message);
       });
   };

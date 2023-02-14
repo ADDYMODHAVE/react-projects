@@ -51,7 +51,9 @@ const ProDescription = (props) => {
           </div>
           <div>
             <h2>Ratings & Reviews</h2>
-            <button id="but">{Math.floor(Math.random() * 10)}/10☆</button>
+            <button id="but">
+              {Math.floor(Math.random() * 10 * 1)}/10☆
+            </button>
             <p>good</p>
             <p>very good 💕</p>
             <p>Love it 💕</p>

@@ -18,7 +18,7 @@ import Passwordchanger from "./Component/Login/PasswordChange";
 function App() {
   const [cartdisplay, setcart] = useState(false);
   const ctx = useContext(AuthContext);
-  const isLoggedIn = ctx.isLoggedIn;
+  const isLoggedIn = ctx.isLoggedIn ||localStorage.getItem("tokenid");
 
   const cartbuttonhandler = () => {
     setcart(true);
