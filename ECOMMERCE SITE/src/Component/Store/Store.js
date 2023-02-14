@@ -1,7 +1,7 @@
 import React from "react";
 import "./Store.css";
 import Card from "../UI/Card";
-import { productsArr } from "../Context/CartProvider";
+import { productsArr } from "../Context/Cart-Context/CartProvider";
 
 const Store = () => {
   return (

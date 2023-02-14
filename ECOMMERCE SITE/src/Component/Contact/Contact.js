@@ -1,7 +1,12 @@
-import React from "react";
+import { useHistory, Prompt, NavLink } from "react-router-dom";
+import React, { useState } from "react";
 import "./Contact.css";
 
 const Contact = (props) => {
+    const history = useHistory();
+
+    const [focusing, setfocus] = useState(false);
+
   const submitHandler = async (e) => {
     e.preventDefault();
     const datafromuser = {
@@ -10,8 +15,8 @@ const Contact = (props) => {
       Phone: e.target.phone.value,
     };
 
-    fetch(
-      "https://data-edd3c-default-rtdb.firebaseio.com//dataofuseer.json",
+    await fetch(
+      "https://react-http-a04e6-default-rtdb.firebaseio.com/dataofuseer.json",
       {
         method: "POST",
         body: JSON.stringify(datafromuser),
@@ -22,13 +27,26 @@ const Contact = (props) => {
     e.target.name.value = "";
     e.target.exampleInputEmail1.value = "";
     e.target.phone.value = "";
+    history.push("./store");
+  };
+
+  const focusedhandler = () => {
+    setfocus(false);
+  };
+
+  const focusinghandler = () => {
+    setfocus(true);
   };
 
   return (
     <div className="row justify-content-evenly">
       <div className="col-7 mt-5">
         <h2 className="heading">Contact Us:-</h2>
-        <form onSubmit={submitHandler}>
+        <Prompt
+          when={focusing}
+          message={(location) => "Are You Sure ,You Want To leave"}
+        />
+        <form onFocus={focusinghandler} onSubmit={submitHandler}>
           <label htmlFor="exampleInputname" className="form-label">
             Name:
           </label>
@@ -54,10 +72,14 @@ const Contact = (props) => {
             type="submit"
             id="submitbtn"
             className="btn btn-outline-primary mt-2"
+            onClick={focusedhandler}
           >
             Submit
           </button>
         </form>
+        <NavLink className="btn btn-outline-primary mt-2" to="/passwordchanger">
+          ChangePassword
+        </NavLink>
       </div>
     </div>
   );

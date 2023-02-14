@@ -1,19 +1,24 @@
 import { Route, Switch, Redirect } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import Header from "./Component/Header/Header";
 import Brand from "./Component/Brand/Brand";
 import StoreItem from "./Component/Store/Store";
 import CartContent from "./Component/Cart/CartContent";
-import CartProvider from "./Component/Context/CartProvider";
+import CartProvider from "./Component/Context/Cart-Context/CartProvider";
 import Fotter from "./Component/Fotter/Fotter";
 import About from "./Component/About/About";
 import Home from "./Component/Home/Home";
 import Contact from "./Component/Contact/Contact";
-import { productsArr } from "./Component/Context/CartProvider";
+import { productsArr } from "./Component/Context/Cart-Context/CartProvider";
 import ProDescription from "./Component/ProDes/ProDescription";
+import LogIn from "./Component/Login/Login";
+import AuthContext from "./Component/Context/Auth-Context/Auth-Context";
+import Passwordchanger from "./Component/Login/PasswordChange";
 
 function App() {
   const [cartdisplay, setcart] = useState(false);
+  const ctx = useContext(AuthContext);
+  const isLoggedIn = ctx.isLoggedIn;
 
   const cartbuttonhandler = () => {
     setcart(true);
@@ -23,10 +28,16 @@ function App() {
   };
   return (
     <CartProvider>
-      <div className="container-fluid">
-        <Header onshow={cartbuttonhandler} />
-        <Brand />
-        {cartdisplay && <CartContent onremove={cartclosebuttonhandler} />}
+    {!isLoggedIn && (
+        <Route path="/">
+          <LogIn />
+        </Route>
+      )}
+      {isLoggedIn && (
+        <div className="container-fluid">
+          <Header onshow={cartbuttonhandler} />
+          <Brand />
+          {cartdisplay && <CartContent onremove={cartclosebuttonhandler} />}
         <Switch>
           <Route path="/" exact>
             <Redirect to="/store" />
@@ -43,21 +54,26 @@ function App() {
           <Route path="/contact">
             <Contact />
           </Route>
-          {productsArr.map((item) => {
-            return (
-              <Route key={item.id} path={`/productdetails/${item.id}`}>
-                <ProDescription
-                  id={item.id}
-                  title={item.title}
-                  imageUrl={item.imageUrl}
-                  price={item.price}
-                />
-              </Route>
-            );
-          })}
-        </Switch>
-        <Fotter />
-      </div>
+          <Route path="/passwordchanger">
+              <Passwordchanger />
+            </Route>
+
+            {productsArr.map((item) => {
+              return (
+                <Route key={item.id} path={`/productdetails/${item.id}`}>
+                  <ProDescription
+                    id={item.id}
+                    title={item.title}
+                    imageUrl={item.imageUrl}
+                    price={item.price}
+                  />
+                </Route>
+              );
+            })}
+          </Switch>
+          <Fotter />
+        </div>
+      )}
     </CartProvider>
   );
 }
