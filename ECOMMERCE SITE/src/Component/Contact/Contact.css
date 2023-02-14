@@ -1,10 +1,7 @@
-.heading {
-  font-weight: 700;
+.heading{
+ font-weight: 700;  
 }
-#submitbtn:hover {
-  border: 2px solid red;
-  background-color: rgb(24, 218, 214);
-}
-#formclass{
-    background-color: bisque;
+#submitbtn:hover{
+    border: 2px solid red;
+    background-color: rgb(24, 218, 214);;
 }

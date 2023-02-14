@@ -1,19 +1,20 @@
-import React, { useContext } from "react";
+import React,{useContext} from "react";
 import "./Cart.css";
-import CartContext from "../Context/Cart-Context/Cart-Context";
+import CartContext from "../Context/Cart-context/Cart-Context";
 
 const Cartbutton = (props) => {
-  const ctx = useContext(CartContext);
 
-  const numberofitemincart = ctx.items.reduce((prvdata, item) => {
-    return prvdata + item.amount;
-  }, 0);
+const ctx=useContext(CartContext);
+
+const numberofitemincart=ctx.items.reduce((prvdata,item)=>{
+  return prvdata+item.amount
+},0)
 
   return (
     <div className="row">
       <div className="col-12">
         <button onClick={props.onshowing} id="cart-btn">
-          CART
+          cart
         </button>
         <span id="counter">{numberofitemincart}</span>
       </div>

@@ -3,6 +3,7 @@ import "./Fotter.css";
 import youtube from "../../Component/Images/youtube-logo-red-hd-13.png";
 import spotify from "../../Component/Images/logo-music-player-spotify-brand-10.png";
 import facebook from "../../Component/Images/facebook-icon-vectors-3.jpg";
+
 const Fotter = (props) => {
   return (
     <div className="row">

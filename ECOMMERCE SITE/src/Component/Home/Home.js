@@ -38,7 +38,9 @@ const Home = (props) => {
 
         <div className="tours">
           <h2 id="tou">TOURS</h2>
-          <ul className="list-group list-group-flush">{col}</ul>
+          <ul className="list-group list-group-flush">
+           {col}
+          </ul>
         </div>
       </div>
     </div>

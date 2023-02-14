@@ -1,9 +1,10 @@
-import { useHistory, Prompt, NavLink } from "react-router-dom";
+import { useHistory, Prompt,NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import "./Contact.css";
 
 const Contact = (props) => {
   const history = useHistory();
+
   const [focusing, setfocus] = useState(false);
 
   const submitHandler = async (e) => {
@@ -29,17 +30,18 @@ const Contact = (props) => {
     history.push("./store");
   };
 
-  const focusedhandler = () => {
-    setfocus(false);
-  };
+const focusedhandler=()=>{
+  setfocus(false);
+}
 
   const focusinghandler = () => {
     setfocus(true);
   };
 
+
   return (
     <div className="row justify-content-evenly">
-      <div className="col-7 mt-5">
+      <div className="col-7  mt-5">
         <h2 className="heading">Contact Us:-</h2>
         <Prompt
           when={focusing}
@@ -76,7 +78,7 @@ const Contact = (props) => {
             Submit
           </button>
         </form>
-        <NavLink className="btn btn-outline-primary mt-2" to="/passwordchanger">
+         <NavLink className="btn btn-outline-primary mt-2" to="/passwordchanger">
           ChangePassword
         </NavLink>
       </div>

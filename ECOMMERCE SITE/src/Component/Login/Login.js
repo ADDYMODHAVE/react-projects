@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { useState, useRef, useContext } from "react";
+import { useState, useRef,useContext } from "react";
 import AuthContext from "../Context/Auth-Context/Auth-Context";
 import classes from "./Login.module.css";
 
@@ -7,13 +7,14 @@ const LogIn = () => {
   const emailItnputRef = useRef();
   const passwordInputRef = useRef();
 
-  const history = useHistory();
+  const history=useHistory();
 
-  const ctx = useContext(AuthContext);
+  const ctx=useContext(AuthContext)
 
   const [isLogin, setIsLogin] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading,setIsLoading]=useState(false);
+
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -27,39 +28,40 @@ const LogIn = () => {
     setIsLoading(true);
     let url;
     if (isLogin) {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA";
+        url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA'
     } else {
-      url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA";
+        url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA'
     }
 
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        email: enteredemail,
-        password: enteredpassword,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then(async res => {
+      fetch(
+        url,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: enteredemail,
+            password: enteredpassword,
+            returnSecureToken: true,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      ).then(res => {
         setIsLoading(false);
         if (res.ok) {
           emailItnputRef.current.value="";
           passwordInputRef.current.value="";
           return res.json();
         } else {
-          const data = await res.json();
-            let errmessage = "Authentication Failed";
-            if (data && data.error && data.error.message) {
-                errmessage = data.error.message;
-            }
-            throw new Error(errmessage);
+          return res.json().then((data) => {
+           let errmessage ="Authentication Failed";
+           if(data && data.error && data.error.message){
+            errmessage= data.error.message; 
+           }
+           throw new Error(errmessage);
+          });
         }
-      })
-      .then(data=>{
+      }).then(data=>{
          ctx.Login(data.idToken);
          localStorage.setItem("tokenid",data.idToken)
          history.replace("/")
@@ -67,10 +69,11 @@ const LogIn = () => {
           localStorage.removeItem("tokenid");
           console.log("logedout with timer")
          },300000)
-      }).catch((err) => {
+      }).catch(err=>{
         alert(err.message);
-      });
-  };
+      })
+     
+};
 
   return (
     <section className={classes.auth}>
@@ -90,10 +93,8 @@ const LogIn = () => {
           />
         </div>
         <div className={classes.actions}>
-          {!isLoading && (
-            <button>{isLogin ? "Login" : "Create Account"}</button>
-          )}
-          {isLoading && <p>Sending Request....</p>}
+         {!isLoading && <button>{isLogin ? "Login" : "Create Account"}</button>}
+         {isLoading && <p>Sending Request....</p>} 
           <button
             type="button"
             className={classes.toggle}
