@@ -11,6 +11,9 @@
 }
 
 #price {
+  border-radius: 3px;
+ margin: 2px;
+  background-color: bisque;
   font-weight: 800;
 }
 .btncart {
