@@ -16,7 +16,7 @@ const Passwordchanger = () => {
     const enterednewpassword = passwordref.current.value;
 
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA",
+      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCtAB2ySpP41rMWn_UdbtdGgUXfepvS18I",
       {
         method: "POST",
         body: JSON.stringify({

@@ -12,7 +12,7 @@ const logedouthandler=()=>{
   ctx.Logout();
   localStorage.removeItem("tokenid");
   localStorage.removeItem("emailid");
-  history.replace("/");
+  history.replace("/")
 }
 
 

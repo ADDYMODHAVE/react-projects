@@ -28,9 +28,9 @@ const LogIn = () => {
     setIsLoading(true);
     let url;
     if (isLogin) {
-        url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA'
+        url='https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCtAB2ySpP41rMWn_UdbtdGgUXfepvS18I'
     } else {
-        url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA'
+        url='https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCtAB2ySpP41rMWn_UdbtdGgUXfepvS18I'
     }
 
       fetch(
@@ -64,9 +64,11 @@ const LogIn = () => {
       }).then(data=>{
          ctx.Login(data.idToken);
          localStorage.setItem("tokenid",data.idToken)
+         localStorage.setItem("emailid",data.email)
          history.replace("/")
          setTimeout(()=>{
           localStorage.removeItem("tokenid");
+          localStorage.removeItem("emailid");
           console.log("logedout with timer")
          },300000)
       }).catch(err=>{
