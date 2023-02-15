@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import "./Card.css";
 import Input from "./Input";
 import React,{useRef,useContext} from "react";
@@ -14,17 +15,81 @@ const ctx=useContext(CartContext);
   const addtocarthandler = (e) => {
     e.preventDefault();
     
-   const amounttobeadd=(cartref.current.value);
-   const actualnoofamount=+amounttobeadd;
+   
+    const amounttobeadd = cartref.current.value;
+    const actualnoofamount = +amounttobeadd;
 
-   ctx.AddItem({
-    title:props.title,
-    amount:actualnoofamount,
-    price:props.price,
-    id:props.id,
-    imageUrl:props.imageUrl
-   })
+    ctx.AddItem({
+      title: props.title,
+      amount: actualnoofamount,
+      price: props.price,
+      id: props.id,
+      imageUrl: props.imageUrl,
+    });
+
+
+    async function cartsendingdata() {
+
+      const useremailid = localStorage.getItem("emailid");
+      const replacedEmailId = useremailid
+        .replace("@", "")
+        .replace(".", "")
+        .replace("/", "");
+
+      var ispresent = false;
+      var presentid;
+      var itemamount;
+      let res = await axios.get(
+        `https://crudcrud.com/api/d7fccacfb4a74b4aa3ad43b35a1d8617/cart${replacedEmailId}`
+      );
+
+      for (var i = 0; i < res.data.length; i++) {
+        if (res.data[i].id === props.id) {
+          ispresent = true;
+          presentid = res.data[i]._id;
+          itemamount = parseInt(res.data[i].amount);
+        }
+      }
+
+   async function putifdatpresent(){
+   await axios
+    .put(
+      `https://crudcrud.com/api/d7fccacfb4a74b4aa3ad43b35a1d8617/cart${replacedEmailId}/${presentid}`,
+      {
+        id: props.id,
+        title: props.title,
+        amount: itemamount + actualnoofamount,
+        price: props.price,
+        imageUrl: props.imageUrl,
+      }
+    )
+   }
+
+   async function postifalreadypresent(){
+   await axios
+    .post(
+      `https://crudcrud.com/api/d7fccacfb4a74b4aa3ad43b35a1d8617/cart${replacedEmailId}`,
+      {
+        id: props.id,
+        title: props.title,
+        amount: actualnoofamount,
+        price: props.price,
+        imageUrl: props.imageUrl,
+      }
+    )
+
+   }
+
+      if (ispresent) {
+        putifdatpresent();
+      } else {
+        postifalreadypresent();
+      }
+    }
+
+    cartsendingdata();
   };
+
 
   return (
     <div className="card">

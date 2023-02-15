@@ -11,7 +11,8 @@ const history=useHistory();
 const logedouthandler=()=>{
   ctx.Logout();
   localStorage.removeItem("tokenid");
-  history.push("/home");
+  localStorage.removeItem("emailid");
+  history.replace("/");
 }
 
 
