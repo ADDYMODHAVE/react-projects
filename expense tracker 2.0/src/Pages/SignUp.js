@@ -52,7 +52,7 @@ const SignUp = () => {
           alert("Login Successful");
         }
       } else {
-        const data = await res.json;
+        const data = await res.json();
         throw data.error;
       }
     } catch (error) {
@@ -86,7 +86,7 @@ const SignUp = () => {
 
         <button type="submit">{login ? "Login" : "Sign Up"}</button>
         <div className="signup-login" onClick={accountHandler}>
-          {login ? "Click here to Sign Up" : "click here to Login"}
+          {login ? "Click here to Sign Up" : "Click here to Login"}
         </div>
       </form>
     </div>
