@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef,useEffect } from "react";
 import "./UpdateProfile.css";
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,35 @@ export const UpdateProfile = () => {
   const inputFullnameRef = useRef();
   const inputPhotoUrlRef = useRef();
   const navigate = useNavigate();
+  useEffect(() => {
+    async function fetchProfile() {
+       try{
+        const res = await fetch(
+          "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              idToken: JSON.parse(localStorage.getItem("idToken")).idToken,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const data = await res.json();
+      //  console.log(data.users[0]);
+        console.log(data.users[0].photoUrl);
+        console.log(data.users[0].displayName);
+        if(res.ok){
+            inputFullnameRef.current.value = data.users[0].displayName
+            inputPhotoUrlRef.current.value = data.users[0].photoUrl
+        }
+      } catch(error){
+        console.log(error.message)
+      }
+    }
+    fetchProfile();
+  }, []);
 
   const profileSubmitHandler = async (event) => {
     event.preventDefault();
