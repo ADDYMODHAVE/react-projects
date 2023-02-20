@@ -12,7 +12,7 @@ const Expenses = () => {
   async function fetchExpenses() {
     try {
       const res = await fetch(
-        `https://data-edd3c-default-rtdb.firebaseio.com/${localStorage.getItem("email")}.json`,
+        `https://data-edd3c-default-rtdb.firebaseio.com/user-expenses/${localStorage.getItem("email")}.json`,
         {
           method: "GET",
           headers: {
@@ -39,10 +39,8 @@ const Expenses = () => {
     }
   }
 
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
-  const addExpenseHandler = async (event) => {
+ 
+  const addExpenseHandler =  async (event) => {
     event.preventDefault();
     const obj = {
       amount: inputAmountRef.current.value,
@@ -51,7 +49,7 @@ const Expenses = () => {
     };
     try {
       const res = await fetch(
-        `https://data-edd3c-default-rtdb.firebaseio.com/${localStorage.getItem("email")}.json`,
+        `https://data-edd3c-default-rtdb.firebaseio.com/user-expenses/${localStorage.getItem("email")}.json`,
         {
           method: "POST",
           headers: {
@@ -76,6 +74,10 @@ const Expenses = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchExpenses();
+  },[]);
   return (
     <div>
       <div>
