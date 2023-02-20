@@ -21,6 +21,7 @@ const MainNavigation = (props) => {
 
   const logoutHandler = async () => {
     await localStorage.removeItem("idToken");
+    await localStorage.removeItem("email");
     setUserLogin(false);
     navigate("/login");
     alert("Logout Successful");
@@ -28,12 +29,11 @@ const MainNavigation = (props) => {
   return (
     <div className="mainNav">
       <ul>
-        <li>
-          <NavLink to="/home">Home</NavLink>{" "}
-        </li>
         {userLogin && (
           <>
-            {" "}
+            <li>
+              <NavLink to="/home">Home</NavLink>{" "}
+            </li>
             <li>
               <NavLink to="/expenses">Expenses</NavLink>
             </li>
@@ -43,15 +43,16 @@ const MainNavigation = (props) => {
             <li>
               <NavLink to="/profile">Profile</NavLink>
             </li>
+            <li>
+              <NavLink onClick={logoutHandler}>Logout</NavLink>
+            </li>
           </>
         )}
-
-        <li>
-          <NavLink to="/login">Login</NavLink>
-        </li>
-        <li>
-          <NavLink onClick={logoutHandler}>Logout</NavLink>
-        </li>
+        {!userLogin && (
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+        )}
       </ul>
     </div>
   );
