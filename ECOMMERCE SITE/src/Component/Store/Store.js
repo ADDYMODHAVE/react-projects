@@ -1,6 +1,7 @@
 import React from "react";
 import "./Store.css";
-import Card from "../Ui/Card";
+// import Card from "../Ui/Card";
+import Card from "../UI/Card"
 import { productsArr } from "../Context/Cart-context/CartProvider";
 
 

@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useState } from "react";
 import CartContext from "./Cart-Context";
 import axios from "axios";
 
@@ -45,154 +45,105 @@ if (localStorage.getItem("emailid") === null) {
 console.log(useremailid);
 const replacedEmailId = useremailid.replace("@", "").replace(".", "");
 
-var curdid;
 
-export const baseUrl = `https://crudcrud.com/api/ec3365d3e77a4c6798e70df92eaf3f3a/${replacedEmailId}`;
+export const baseUrl = `https://crudcrud.com/api/29575f738f0c4047bc3478e59ebe203c/${replacedEmailId}`;
 
-var arr = [];
-
-axios
-  .get(`${baseUrl}`)
-  .then((res) => {
-    for (var i = 0; i < res.data.length; i++) {
-      arr.push(res.data[i]);
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-const defaultcart = {
-  items: arr,
-  TotalAmount: 0,
-};
-
-const cartreducer = (state, action) => {
-  if (action.type === "ADD") {
-    const updatedTotalAmount =
-      state.TotalAmount + action.item.price * action.item.amount;
-    localStorage.setItem("amount", updatedTotalAmount);
-    const existingCartItemIndex = state.items.findIndex(
-      (item) => item.id === action.item.id
-    );
-
-    const existingCartItem = state.items[existingCartItemIndex];
-    let updatedItems;
-
-    axios
-      .get(`${baseUrl}`)
-      .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          if (res.data[i].id === existingCartItem.id) {
-            curdid = res.data[i]._id;
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    if (existingCartItem) {
-      const updatedItem = {
-        ...existingCartItem,
-        amount: existingCartItem.amount + action.item.amount,
-      };
-
-      updatedItems = [...state.items];
-      updatedItems[existingCartItemIndex] = updatedItem;
-
-      axios
-        .put(`${baseUrl}/${curdid}`, updatedItem)
-        .then((res) => console.log(res))
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      updatedItems = state.items.concat(action.item);
-      axios
-        .post(`${baseUrl}`, action.item)
-        .then((res) => console.log(res))
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-
-    return {
-      items: updatedItems,
-      TotalAmount: updatedTotalAmount,
-    };
-  }
-  if (action.type === "REMOVE") {
-    const existingCartItemIndex = state.items.findIndex(
-      (item) => item.id === action.id
-    );
-
-    const existingItem = state.items[existingCartItemIndex];
-
-    const updatedTotalAmount =
-      state.TotalAmount - existingItem.price * existingItem.amount;
-
-    localStorage.setItem("amount", updatedTotalAmount);
-
-    let updatedItems;
-
-    axios
-      .get(`${baseUrl}`)
-      .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          if (res.data[i].id === existingItem.id) {
-            curdid = res.data[i]._id;
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    if (existingItem.amount === 1) {
-      updatedItems = state.items.filter((item) => item.id !== action.id);
-      axios
-        .delete(`${baseUrl}/${curdid}`)
-        .then((res) => console.log(res))
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
-      updatedItems = [...state.items];
-      updatedItems[existingCartItemIndex] = updatedItem;
-
-      axios
-        .put(`${baseUrl}/${curdid}`, updatedItem)
-        .then((res) => console.log(res))
-        .catch((err) => {
-          localStorage.removeItem("amount");
-        });
-    }
-
-    return {
-      items: updatedItems,
-      TotalAmount: updatedTotalAmount,
-    };
-  }
-
-  return defaultcart;
-};
 
 const CartProvider = (props) => {
-  const [cartstate, dispatchfunction] = useReducer(cartreducer, defaultcart);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const additemhandler = (item) => {
-    dispatchfunction({ type: "ADD", item: item });
+  useEffect(() => {
+    const getUserData = async () => {
+      if (!useremailid) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`${baseUrl}`);
+        setItems(response.data);
+        setLoading(false);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    };
+
+    getUserData();
+  }, []);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+
+
+  const removeitemhandler = async (id) => {
+    const existingCartItem = items.filter((cartItem) => cartItem.id === id);
+  
+    if (existingCartItem.length > 0) {
+      const cartItem = existingCartItem[0];
+  
+      try {
+        await axios.delete(`${baseUrl}/${cartItem._id}`);
+        const updatedItems = items.filter((cartItem) => cartItem.id !== id);
+        setItems(updatedItems);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
+  
+  
 
-  const removeitemhandler = (id) => {
-    dispatchfunction({ type: "REMOVE", id: id });
+  const additemhandler = async (item) => {
+    const existingCartItem = items.filter(
+      (cartItem) => cartItem.id === item.id
+    );
+console.log(item);
+    console.log(existingCartItem);
+
+    if (existingCartItem.length > 0) {
+      console.log(`inside put`);
+      const updateExistingCartItem = {
+        ...item,
+        amount: existingCartItem[0].amount + item.amount,
+      };
+    console.log(updateExistingCartItem);
+      try {
+         await axios.put(
+          `${baseUrl}/${existingCartItem[0]._id}`,
+          updateExistingCartItem
+        );
+
+        const updateExistingCartItemAfterPut = items.map((cartItem) => {
+          if (cartItem.id === updateExistingCartItem.id) {
+            return {
+              ...existingCartItem[0],
+              amount: existingCartItem[0].amount + item.amount,
+            };
+          } else {
+            return cartItem;
+          }
+        });
+        setItems(updateExistingCartItemAfterPut);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log(`for post`);
+      try {
+        const response = await axios.post(`${baseUrl}`, item);
+        setItems([...items, response.data]);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   const cartContext = {
-    items: cartstate.items,
-    TotalAmount: cartstate.TotalAmount,
+    items: items,
+    // TotalAmount: cartstate.TotalAmount,
     AddItem: additemhandler,
     removeItem: removeitemhandler,
   };

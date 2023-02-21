@@ -1,5 +1,6 @@
 import "./ProDes.css";
-import Input from "../Ui/Input";
+// import Input from "../Ui/Input";
+import Input from "../UI/Input";
 import React, { useRef, useContext } from "react";
 import CartContext from "../Context/Cart-context/Cart-Context";
 
