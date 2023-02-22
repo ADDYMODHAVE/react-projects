@@ -1,0 +1,17 @@
+.brand{
+    background-color: grey;
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 3%;
+    margin-top: 1.9%;
+    border-top: 2px solid white;
+    width: 101.8%;
+    margin-left: -1%;
+}
+#heading{
+    color: white;
+    font-size: 600%;
+    font-weight: 510;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    padding-top: 1rem;
+}
