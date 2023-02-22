@@ -1,122 +1,38 @@
-import { Route, Switch, Redirect } from "react-router-dom";
-import React, { useState, useContext, lazy, Suspense } from "react";
-import Header from "./Component/Header/Header";
-import CartContent from "./Component/Cart/CartContent";
-import CartProvider from "./Component/Context/Cart-context/CartProvider";
-import Contact from "./Component/Contact/Contact";
-import { productsArr } from "./Component/Context/Cart-context/CartProvider";
-import AuthContext from "./Component/Context/Auth-Context/Auth-Context";
-import Passwordchanger from "./Component/Login/PasswordChange";
+import { Fragment} from "react";
+import { Route , Routes } from "react-router-dom";
+import MainNavigation from "./components/MainNavigation";
+import SignUp  from "./pages/SignUp";
+import Home from "./pages/Home";
+import { UpdateProfile } from "./components/UpdateProfile";
+import { ForgotPassword } from "./components/ForgotPassword";
+import Expenses from "./pages/Expenses";
+import Premium from "./components/Premium";
+import { useSelector } from "react-redux";
+import './App.css'
 
-const Home = lazy(() => import("./Component/Home/Home"));
-const About = lazy(() => import("./Component/About/About"));
+function App() {
 
-const StoreItem = lazy(() => import("./Component/Store/Store"));
-
-const LogIn = lazy(() => import("./Component/Login/Login"));
-
-const ProDescription = lazy(() => import("./Component/ProdDes/ProDescription"));
-
-const Fotter = lazy(() => import("./Component/Fotter/Fotter"));
-
-const Brand = lazy(() => import("./Component/Brand/Brand"));
-
-const loading = (
-  <div className="d-flex justify-content-center">
-    <div className="spinner-border" role="status">
-    </div>
-    <div>Loading.....</div>
-  </div>
-);
-
-const App = () => {
-  const [cartdiaplay, setcart] = useState(false);
-
-  const ctx = useContext(AuthContext);
-
-  const isLoggedIn = ctx.isLoggedIn || localStorage.getItem("tokenid");
-
-  const cartbuttonhandler = () => {
-    setcart(true);
-  };
-  const cartclosebuttonhandler = () => {
-    setcart(false);
-  };
-
+  const themeMode = useSelector((state) => state.theme.theme);
   return (
-    <React.Fragment>
-      {!isLoggedIn && (
-        <Route path="/">
-          <Suspense fallback={loading}>
-            <LogIn />
-          </Suspense>
-        </Route>
-      )}
-      {isLoggedIn && (
-        <div className="container-fluid">
-          <CartProvider>
-            <Header onshow={cartbuttonhandler} />
-            <Suspense fallback={loading}>
-              <Brand />
-            </Suspense>
-            {cartdiaplay && <CartContent onremove={cartclosebuttonhandler} />}
-            <Switch>
-              <Route path="/" exact>
-              <Suspense fallback={loading}>
-              <Redirect to="/store" />
-                </Suspense>
-              </Route>
+    <Fragment>
+      <MainNavigation   />
+      <div className={themeMode === 'dark' ? 'dark' : ''}>
+      <Premium />
+       <Routes>
+        <Route path="/home" element={<Home/>} />
+        <Route path="/expenses" element={<Expenses/>} />
 
-              <Route path="/home">
-                <Suspense fallback={loading}>
-                  <Home />
-                </Suspense>
-              </Route>
+        <Route path="/login" element={<SignUp />} />
+        <Route path="/update" element={<UpdateProfile />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
 
-              <Route path="/store">
-                <Suspense fallback={loading}>
-                  <StoreItem />
-                </Suspense>
-              </Route>
 
-              <Route path="/about">
-                <Suspense fallback={loading}>
-                  <About />
-                </Suspense>
-              </Route>
-
-              <Route path="/contact">
-                <Contact />
-              </Route>
-
-              <Route path="/passwordchanger">
-                <Passwordchanger />
-              </Route>
-
-              {productsArr.map((item) => {
-                return (
-                  <Route key={item.id} path={`/productdetails/${item.id}`}>
-                    <Suspense fallback={loading}>
-                      <ProDescription
-                        id={item.id}
-                        title={item.title}
-                        imageUrl={item.imageUrl}
-                        price={item.price}
-                      />
-                    </Suspense>
-                  </Route>
-                );
-              })}
-            </Switch>
-
-            <Suspense fallback={loading}>
-              <Fotter />
-            </Suspense>
-          </CartProvider>
-        </div>
-      )}
-    </React.Fragment>
+        
+      </Routes> 
+      </div>
+    </Fragment>
+    
   );
-};
+}
 
 export default App;
