@@ -1,59 +1,57 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import "./MainNavigation.css";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import "./MainNavigation.css";
+import { authAction } from "../store/Auth";
 
 const MainNavigation = (props) => {
   const navigate = useNavigate();
-
-  const [userLogin, setUserLogin] = useState(false);
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   useEffect(() => {
     if (localStorage.getItem("idToken") == null) {
-      setUserLogin(false);
+      // setUserLogin(false)
+      dispatch(authAction.logout());
     } else {
-      setUserLogin(true);
+      // setUserLogin(true)
+      dispatch(authAction.login());
     }
-  }, []);
-
+  });
   const logoutHandler = async () => {
     await localStorage.removeItem("idToken");
     await localStorage.removeItem("email");
-    setUserLogin(false);
     navigate("/login");
+    dispatch(authAction.logout());
     alert("Logout Successful");
   };
+
   return (
     <div className="mainNav">
-      <ul>
-        {userLogin && (
-          <>
+      <nav>
+        <ul>
+          {auth && (
+            <>
+              <li>
+                <NavLink to="/home">Update Profile</NavLink>{" "}
+              </li>
+              <li>
+                <NavLink to="/expenses">Expenses</NavLink>
+              </li>
+              <li>
+                <NavLink onClick={logoutHandler}>Logout</NavLink>
+              </li>{" "}
+            </>
+          )}
+          {!auth && (
             <li>
-              <NavLink to="/home">Home</NavLink>{" "}
+              <NavLink to="/login">Login</NavLink>
             </li>
-            <li>
-              <NavLink to="/expenses">Expenses</NavLink>
-            </li>
-            <li>
-              <NavLink to="/about">About</NavLink>
-            </li>
-            <li>
-              <NavLink to="/profile">Profile</NavLink>
-            </li>
-            <li>
-              <NavLink onClick={logoutHandler}>Logout</NavLink>
-            </li>
-          </>
-        )}
-        {!userLogin && (
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-        )}
-      </ul>
+          )}
+        </ul>
+      </nav>
     </div>
   );
 };

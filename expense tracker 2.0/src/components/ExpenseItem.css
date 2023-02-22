@@ -1,3 +1,7 @@
+li{
+    margin: 30px;
+}
+
 li button{
     cursor: pointer;
     margin: 2px;
@@ -12,7 +16,4 @@ li button{
 }
 .bg-blue{
     background-color: blue;
-}
-.expenselist {
-   padding: 10px;
 }

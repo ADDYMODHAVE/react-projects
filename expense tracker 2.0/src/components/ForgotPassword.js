@@ -1,13 +1,13 @@
 import React ,{useRef}from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const ForgotPassword = () => {
+export const ForgotPassword = () => {
     const emailRef= useRef();
     const navigate = useNavigate();
     const forgotPasswordHandler=async(event)=>{
         event.preventDefault();
         try{
-          const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCwYMs-t9xN-Hk0q-RPAUaV_iQMTI2IHOA',
+          const res = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyAULICMLkKpLi7eJ9CIrBXM3fvXPmVHqoA',
           {
             method:'POST',
             headers :{
@@ -37,11 +37,9 @@ const ForgotPassword = () => {
           <h3>Forgot Password</h3>
           <label htmlFor="email">Enter Your Email</label>
           <input ref={emailRef} type="email" id="email" />
-
+          
           <button  type="submit">Send Link</button>
         </form> 
     </div>
   )
 }
-
-export default ForgotPassword;
