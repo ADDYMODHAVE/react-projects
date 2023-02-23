@@ -4,14 +4,44 @@
   border-radius: 5px;
   width: 500px;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   box-sizing: border-box;
   text-align: center;
-  box-shadow: 0 0 5px black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.form-expenses:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .form-expenses label {
+  display: block;
   font-weight: bold;
+  margin-bottom: 5px;
+  color : white;
+}
+
+.form-expenses input,
+.form-expenses textarea,
+.form-expenses select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #f5f5f5;
+  transition: all 0.3s ease-in-out;
+}
+
+.form-expenses input:focus,
+.form-expenses textarea:focus,
+.form-expenses select:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
 .form-expenses button {
@@ -20,16 +50,52 @@
   text-align: center;
   background-color: blue;
   color: white;
-  padding: 3px 10px;
-  margin-top: 3px;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.form-expenses input,
-textarea,
-select {
-  display: block;
-  width: 100%;
-  padding: 3px;
-  margin: 5px 0 5px 0;
-  box-sizing: border-box;
+.form-expenses button:hover {
+  background-color: #0066cc;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.expenses-list {
+  width: 60%;
+  margin: auto;
+  list-style-type: none;
+  background: rgb(204, 102, 255);
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.3s ease-in-out;
+}
+
+.expenses-list:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.expenses-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f3eaf0;
+}
+
+.expenses-list li:last-child {
+  margin-bottom: 0;
+}
+
+.expenses-list span {
+  padding: 5px 10px;
+  background-color: #0066cc;
+  color: white;
+  border-radius: 5px;
 }

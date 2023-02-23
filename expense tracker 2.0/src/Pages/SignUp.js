@@ -1,16 +1,14 @@
 import React, { useRef, useState } from "react";
+import "./SignUp.css";
 import { useNavigate } from "react-router-dom";
 
-import "./SignUp.css";
 
-
-
-const SignUp = () => {
+const SignUp = (props) => {
   const inputEmailRef = useRef();
   const inputPasswordRef = useRef();
   const inputConfirmPasswordRef = useRef();
   const [login, setLogin] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -45,13 +43,12 @@ const SignUp = () => {
         },
       });
       if (res.ok) {
-        setLogin(true);
         const data = await res.json();
-        const useremailid=email;
+        const useremailid = email;
         const replacedEmailId = useremailid.replace("@", "").replace(".", "");
-        localStorage.setItem("email",replacedEmailId);
+        localStorage.setItem("email", replacedEmailId);
         localStorage.setItem("idToken", JSON.stringify(data));
-       
+        setLogin(true);
         inputEmailRef.current.value = "";
         inputPasswordRef.current.value = "";
         if (!login) {
@@ -63,11 +60,11 @@ const SignUp = () => {
           navigate("/home");
         }
       } else {
-        const data = await res.json();
+        const data = await res.json;
         throw data.error;
       }
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 
@@ -75,9 +72,9 @@ const SignUp = () => {
     setLogin((prev) => !prev);
   };
 
-  const forgotPasswordHandler=()=>{
-   navigate("/forgotpassword");
-  }
+  const forgotPasswordHandler = () => {
+    navigate("/forgotpassword");
+  };
   return (
     <div className="wrapper">
       <form onSubmit={submitHandler} className="form">
@@ -102,7 +99,7 @@ const SignUp = () => {
         <button type="submit">{login ? "Login" : "Sign Up"}</button>
         {login && <button onClick={forgotPasswordHandler} href="#">Forgot Password</button>}
         <div className="signup-login" onClick={accountHandler}>
-          {login ? "Click here to Sign Up" : "Click here to Login"}
+          {login ? "Click here to Sign Up" : "click here to Login"}
         </div>
       </form>
     </div>

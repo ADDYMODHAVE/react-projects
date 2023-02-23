@@ -1,11 +1,11 @@
 import { Fragment} from "react";
 import { Route , Routes } from "react-router-dom";
 import MainNavigation from "./components/MainNavigation";
-import SignUp  from "./pages/SignUp";
-import Home from "./pages/Home";
+import SignUp  from "./Pages/SignUp";
+import Home from "./Pages/Home";
 import { UpdateProfile } from "./components/UpdateProfile";
 import { ForgotPassword } from "./components/ForgotPassword";
-import Expenses from "./pages/Expenses";
+import Expenses from "./Pages/Expenses";
 import Premium from "./components/Premium";
 import { useSelector } from "react-redux";
 import './App.css'

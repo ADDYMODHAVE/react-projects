@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
 
 const initialExpenseState ={expenses :[],totalAmount:0,firstTime:true}
 

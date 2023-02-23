@@ -1,6 +1,6 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
-import './Home.css';
+import { NavLink } from 'react-router-dom'
+import './Home.css'
 
  const Home = () => {
   const verifyEmail=async(event)=>{
@@ -18,7 +18,7 @@ import './Home.css';
     })
    })
    if(res.ok){
-    alert("VERIFICATION MAIL SEND PLS CHEACK YOUR MAIL");
+    alert("Verification Mail Send Pls Cheack Your Email");
    }
    const data = await res.json();
    console.log(data)
@@ -33,9 +33,10 @@ import './Home.css';
     <h2 className='margin-auto'>Welcome To Expense Tracker</h2>
     <div className='profile'>Your Profile is incomplete <NavLink className="link-profile" to="/update">complete now</NavLink></div>
     </div>
-    <div className='verify-email text-center pt-1' ><button style={{"cursor":"pointer" , "color":"blue"}} onClick={verifyEmail}>Verify Email</button></div>
+    <div className='verify-email text-center pt-1' ><button className='btn btn-dark' onClick={verifyEmail}>Verify Email</button></div>
     </>
   )
 }
 
 export default Home
+

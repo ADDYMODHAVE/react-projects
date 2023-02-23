@@ -2,19 +2,35 @@
     display: flex;
     justify-content: space-between;
 }
-.profile-update{
-    background: lightgray;
-    color: black;
-    padding: 0 3px;
-    border-radius: 5px;
-    padding: 0 10px;
+.main-update-profile {
+    color : white;
 }
+.profile-update {
+    background-color: #f7d6e0;
+    color: #fff;
+    padding: 10px 10px;
+    border-radius: 25px;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+.profile-update:hover {
+    background-color: #ee9ca7;
+    cursor: pointer;
+}
+
 .main-update-form{
     margin-top: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
+
 .form label{
     font-weight: bold;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
 }
+
 
 .form input {
     display: block;
@@ -22,4 +38,10 @@
     padding: 5px;
     margin: 20px 0 20px 0;
     box-sizing: border-box;
+    
   }
+
+  .form input:hover {
+    background-color: #d658a4;
+    border: 2px solid #a0bc1f;
+}
