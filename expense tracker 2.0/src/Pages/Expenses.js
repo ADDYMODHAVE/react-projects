@@ -136,7 +136,6 @@ const Expenses = () => {
         let updatedtotalAmount =0;
         const newdata = [];
         for (let key in data) {
-
           newdata.push({ id: key, ...data[key] });
           updatedtotalAmount += Number(data[key].amount)
         }
@@ -156,9 +155,8 @@ const Expenses = () => {
   }
 
   fetchExpenses()
-   }, [dispatch , addExpenseHandler,deleteExpenseHandler,editExpenseHandler]);
+   }, [dispatch,addExpenseHandler]);
 
- 
 
   return (
     <div>

@@ -23,6 +23,7 @@ export const addingExpense = (expenseItem) => {
         //   inputCategoryRef.current.value = "";
         //   await fetchExpenses();
         const newData = {
+              id:data.name,
           ...expenseItem,
         };
         dispatch(

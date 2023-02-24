@@ -13,11 +13,12 @@ import './App.css'
 function App() {
 
   const themeMode = useSelector((state) => state.theme.theme);
+  const isLogedIn = useSelector((state)=>state.auth.isAuthenticated);
   return (
     <Fragment>
       <MainNavigation   />
       <div className={themeMode === 'dark' ? 'dark' : ''}>
-      <Premium />
+      {isLogedIn && <Premium />}
        <Routes>
         <Route path="/home" element={<Home/>} />
         <Route path="/expenses" element={<Expenses/>} />

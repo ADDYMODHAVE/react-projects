@@ -27,7 +27,6 @@ import './ExpenseItem.css'
         console.log(error.message)
        }
     }
-
     const editHandler=async()=>{
         try{
             const res = await fetch(`https://data-edd3c-default-rtdb.firebaseio.com/expense-tracker/${localStorage.getItem("email")}/${props.item.id}.json`,
