@@ -4,6 +4,8 @@ import AuthPage from "./component/Pages/AuthPage";
 import { Route } from "react-router-dom";
 import Mailfirst from "./component/Mail/ComposeMail";
 import Inbox from "./component/Mail/Inbox";
+import MailDetails from "./component/Mail/MailDetails";
+
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
       </Route>
       <Route path="/inbox" exact>
         <Inbox />
+      </Route>
+      <Route path="/inbox/details" exact>
+        <MailDetails />
       </Route>
       <Route path="/mail">
         <Mailfirst />

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authslice from "./Auth-redux";
-import emailSlice from "./email-redux";
+import emailSlice from "./email-reducer";
 
 const store = configureStore({
   reducer: {
