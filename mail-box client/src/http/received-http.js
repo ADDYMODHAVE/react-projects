@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useSendDataHttp = () => {
+const useReceivedDataHttp = () => {
   let email = localStorage.getItem("Email").replace(".", "").replace("@", "");
 
   const [resmails, setMails] = useState([]);
@@ -10,7 +10,7 @@ const useSendDataHttp = () => {
     setInterval(() => {
       axios
         .get(
-          `https://data-edd3c-default-rtdb.firebaseio.com/${email}/sent.json`
+          `https://data-edd3c-default-rtdb.firebaseio.com/${email}/received.json`
         )
         .then((res) => {
           setMails(res.data);
@@ -30,4 +30,4 @@ const useSendDataHttp = () => {
   return result;
 };
 
-export default useSendDataHttp;
+export default useReceivedDataHttp;
