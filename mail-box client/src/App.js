@@ -2,15 +2,21 @@ import React from "react";
 import "./App.css";
 import AuthPage from "./component/Pages/AuthPage";
 import { Route } from "react-router-dom";
-import Mailfirst from "./component/Mail/ComposeMail";
 import Inbox from "./component/Mail/Inbox";
-import MailDetails from "./component/Mail/MailDetails";
+
+import ManagedMails from "./component/Mail/ManagedMails";
+import ShowsentMail from "./component/Mail/SentMails";
+import { Button } from "react-bootstrap";
 
 
 function App() {
   return (
     <main>
-      <h1>MailBox</h1>
+     <div className="d-grid gap-2">
+        <Button variant="primary" size="lg">
+         addy-mailbox
+        </Button>
+      </div>
       <Route path="/" exact>
         <AuthPage />
       </Route>
@@ -21,10 +27,10 @@ function App() {
         <Inbox />
       </Route>
       <Route path="/inbox/details" exact>
-        <MailDetails />
+        <ShowsentMail />
       </Route>
       <Route path="/mail">
-        <Mailfirst />
+        <ManagedMails />
       </Route>
     </main>
   );

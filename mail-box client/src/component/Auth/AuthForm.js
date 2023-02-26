@@ -6,7 +6,7 @@ import { authActions } from "../Store/Auth-redux";
 
 
 const AuthForm = () => {
-  console.log("insideAuth");
+  // console.log("insideAuth");
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setisLoading] = useState();
   const emailInputref = useRef();
@@ -69,7 +69,7 @@ const AuthForm = () => {
         console.log(data);
         dispatch(authActions.login(data.idToken));
         setlogingState(true);
-        localStorage.setItem("Email",enteredEmail);
+        localStorage.setItem("Email", enteredEmail);
       })
       .catch((err) => {
         alert(err.message);

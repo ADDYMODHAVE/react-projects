@@ -9,9 +9,9 @@ import store from "./component/Store/index";
 React bootstrap configuration
  */
 
-// import "../node_modules/react-bootstrap/dist/react-bootstrap";
+import "../node_modules/react-bootstrap/dist/react-bootstrap";
 // import "../node_modules/bootstrap/dist/bootstrap.css";
-// import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

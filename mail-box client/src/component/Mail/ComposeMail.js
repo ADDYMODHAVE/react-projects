@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import Header from "../Pages/Header";
 import { Fragment } from "react";
 import { Button, Form } from "react-bootstrap";
 import { emailActions } from "../Store/email-reducer";
@@ -109,7 +108,6 @@ function Mailfirst() {
   };
   return (
     <Fragment>
-      <Header />
       <Form>
         <Form.Group>
           <Form.Label>To</Form.Label>
@@ -161,4 +159,5 @@ function Mailfirst() {
     </Fragment>
   );
 }
+
 export default Mailfirst;
