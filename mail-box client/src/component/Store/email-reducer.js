@@ -6,8 +6,6 @@ const emailSlice = createSlice({
     recievedEmails: [],
     sentEmails: [],
     unread: 0,
-    // email:
-    //   localStorage.getItem("email")?.replace(".", "")?.replace("@", "") || "",
   },
   reducers: {
     recievedEmail(state, action) {

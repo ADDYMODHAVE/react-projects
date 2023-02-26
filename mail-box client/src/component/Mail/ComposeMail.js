@@ -4,7 +4,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import Header from "../Pages/Header";
 import { Fragment } from "react";
 import { Button, Form } from "react-bootstrap";
-import { emailActions } from "../store/email-redux";
+import { emailActions } from "../Store/email-reducer";
 import { useDispatch } from "react-redux";
 // import { Fragment } from "react-bootstrap/dist/react-bootstrap";
 function Mailfirst() {
