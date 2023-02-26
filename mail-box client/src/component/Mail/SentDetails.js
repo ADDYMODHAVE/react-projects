@@ -7,13 +7,13 @@ import { Button } from "react-bootstrap";
 const Showsentedmails = () => {
   const location = useLocation();
   const product = location.state2;
-  console.log("inside show sent mails", product);
-  console.log(product.id);
+  // console.log("inside show sent mails", product);
+  // console.log(product.id);
   return (
     <Fragment>
       <div className="d-grid gap-2">
         <Button variant="primary" size="lg" href="/mail">
-          @addy-MailBox
+          @jitu-MailBox
         </Button>
       </div>
       <Card style={{ width: "90rem" }}>
@@ -23,6 +23,7 @@ const Showsentedmails = () => {
           </Card.Title>
           <Card.Text>
             <Badge bg="secondary">Subject</Badge>
+            {"    "}
             {product.item.subject}
           </Card.Text>
           <Card.Text>
@@ -30,6 +31,9 @@ const Showsentedmails = () => {
           </Card.Text>
         </Card.Body>
       </Card>
+      <Button variant="primary" href="/mail">
+        GotoMailbox
+      </Button>
     </Fragment>
   );
 };

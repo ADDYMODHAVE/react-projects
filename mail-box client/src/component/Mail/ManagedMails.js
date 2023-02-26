@@ -4,7 +4,8 @@ import Tabs from "react-bootstrap/Tabs";
 import Mailfirst from "./ComposeMail";
 import Inbox from "./Inbox";
 import ShowsentMail from "./SentMails";
-import { Button } from "react-bootstrap";
+import { Button,Badge } from "react-bootstrap";
+import useSendDataHttp from "../../http/sent-http";
 
 function ManagedMails() {
   let check = 2;
