@@ -1,24 +1,33 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Col, Container, Row, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import classes from "./Allmails.module.css";
 
 const AllEmails = (props) => {
   const { from, subject, id, message } = props.item;
+  const [seenMessage, setseenMessage] = useState(true);
+
+  const seenLIke = () => {
+    seenMessage(false);
+  };
 
   return (
     <Fragment>
       <div>
-        <Container className="justify-content-md-center">
+        <Container className="justify-content-md-center" onClick={seenLIke}>
           <div className={classes.dv1}>
             <Link to={{ pathname: "/inbox/details", state: props }}>
               <Row>
                 <Col>from--{from}</Col>
                 <Col xs={6}>subject--{subject}</Col>
                 <Col>
-                  <Badge pill bg="info">
-                    *
-                  </Badge>{" "}
+                  {seenMessage && (
+                    <Col>
+                      <Badge pill bg="info">
+                        *
+                      </Badge>{" "}
+                    </Col>
+                  )}
                 </Col>
               </Row>
             </Link>

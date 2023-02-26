@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import { Redirect, useLocation } from "react-router-dom";
-import Header from "../Pages/Header";
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
@@ -15,18 +14,22 @@ const MailDetails = () => {
 
   const DeletemailHandler = () => {
     fetch(
-        `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${Id}.json`,
-        {
-          method: "DELETE",
-        }
-      );
+      `https://mail-box-client-668c7-default-rtdb.firebaseio.com/${email}/received/${Id}.json`,
+      {
+        method: "DELETE",
+      }
+    );
     alert("Delete mail handler is working");
-    <Redirect to="/inbox" />
+    <Redirect to="/inbox" />;
   };
 
   return (
     <Fragment>
-        <Header />
+      <div className="d-grid gap-2">
+        <Button variant="primary" size="lg" href="/mail">
+          @addy-MailBox
+        </Button>
+      </div>
       <Card style={{ width: "90rem" }}>
         <Card.Body>
           <Card.Title>
@@ -46,6 +49,7 @@ const MailDetails = () => {
         </Card.Body>
       </Card>
     </Fragment>
-)};
+  );
+};
 
 export default MailDetails;

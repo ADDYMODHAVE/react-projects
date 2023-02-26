@@ -5,11 +5,11 @@ const Header = (event) => {
   return (
     <Nav fill variant="tabs" defaultActiveKey="/home">
       <Nav.Item>
-      <Nav.Link href="/mail">Compose</Nav.Link>
+        <Nav.Link href="/mail">Compose</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-      <Nav.Link href="/inbox" eventKey="link-1">
-        Inbox
+        <Nav.Link href="/inbox" eventKey="link-1">
+          Inbox
         </Nav.Link>
       </Nav.Item>
       <Nav.Item>
