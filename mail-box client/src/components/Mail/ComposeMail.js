@@ -117,7 +117,7 @@ const Mailfirst=()=> {
         <Col xs={10}>
           <Form>
             <Form.Group>
-              <Form.Label>To</Form.Label>
+              <Form.Label style={{color:"white",fontWeight:"600"}}>To</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -127,7 +127,7 @@ const Mailfirst=()=> {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Subject</Form.Label>
+              <Form.Label style={{color:"white",fontWeight:"600"}}>Subject</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Subject"
@@ -137,7 +137,7 @@ const Mailfirst=()=> {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>message</Form.Label>
+              <Form.Label style={{color:"white",fontWeight:"600"}}>message</Form.Label>
 
               <Editor
                 onChange={refHandler}
@@ -148,6 +148,8 @@ const Mailfirst=()=> {
                   border: "1px solid black",
                   borderRadius: "5px",
                   minHeight: "250px",
+                  background:"black",
+                  color:"white",
                 }}
               />
             </Form.Group>

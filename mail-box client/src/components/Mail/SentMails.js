@@ -8,7 +8,7 @@ const ShowsentMail = (props) => {
   const result2 = useSendDataHttp(); 
 
   if(result2.length === 0) {
-    return <h1> No mail found</h1>
+    return <h1 style={{color:"white",fontWeight:"800"}}> No mail found</h1>
   }
 
 

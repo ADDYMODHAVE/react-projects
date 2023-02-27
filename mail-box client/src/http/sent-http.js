@@ -17,7 +17,7 @@ const useSendDataHttp = () => {
         })
         .catch((err) => {
         });
-    }, 2000);
+    },2000);
   }, [email]);
 
   if (resmails === null) {
@@ -26,7 +26,6 @@ const useSendDataHttp = () => {
 
   const result = Object.values(resmails);
   result.reverse();
-
   return result;
 };
 
