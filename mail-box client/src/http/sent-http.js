@@ -10,14 +10,14 @@ const useSendDataHttp = () => {
     setInterval(() => {
       axios
         .get(
-          `https://data-edd3c-default-rtdb.firebaseio.com/${email}/sent.json`
+          `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${email}/sent.json`
         )
         .then((res) => {
           setMails(res.data);
         })
         .catch((err) => {
         });
-    },2000);
+    }, 2000);
   }, [email]);
 
   if (resmails === null) {
@@ -26,6 +26,7 @@ const useSendDataHttp = () => {
 
   const result = Object.values(resmails);
   result.reverse();
+
   return result;
 };
 

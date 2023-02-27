@@ -14,7 +14,7 @@ const SentMailss = (props) => {
 
   const delethandler = () => {
     fetch(
-      `https://data-edd3c-default-rtdb.firebaseio.com/${email}/sent/${id}.json`,
+      `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${email}/sent/${id}.json`,
       {
         method: "DELETE",
       }

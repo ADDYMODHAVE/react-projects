@@ -39,7 +39,7 @@ const Mailfirst=()=> {
     };
 
     fetch(
-      `https://data-edd3c-default-rtdb.firebaseio.com/${receivedEmail}/received.json`,
+      `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${receivedEmail}/received.json`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -53,7 +53,7 @@ const Mailfirst=()=> {
       const data = await res.json();
 
       fetch(
-        `https://data-edd3c-default-rtdb.firebaseio.com/${receivedEmail}/received/${data.name}.json`,
+        `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${receivedEmail}/received/${data.name}.json`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -75,7 +75,7 @@ const Mailfirst=()=> {
     });
 
     fetch(
-      `https://data-edd3c-default-rtdb.firebaseio.com/${emailSender}/sent.json`,
+      `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${emailSender}/sent.json`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -89,7 +89,7 @@ const Mailfirst=()=> {
       const data = await res.json();
 
       fetch(
-        `https://data-edd3c-default-rtdb.firebaseio.com/${emailSender}/sent/${data.name}.json`,
+        `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${emailSender}/sent/${data.name}.json`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -117,27 +117,27 @@ const Mailfirst=()=> {
         <Col xs={10}>
           <Form>
             <Form.Group>
-              <Form.Label style={{color:"white",fontWeight:"600"}}>To</Form.Label>
+              <Form.Label>To</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
                 required
                 ref={EmailInputRef}
-                className="bg-warning"
+                className="bg-light"
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label style={{color:"white",fontWeight:"600"}}>Subject</Form.Label>
+              <Form.Label>Subject</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Subject"
                 required
                 ref={subjectInputRef}
-                className="bg-warning"
+                className="bg-light"
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label style={{color:"white",fontWeight:"600"}}>message</Form.Label>
+              <Form.Label>message</Form.Label>
 
               <Editor
                 onChange={refHandler}
@@ -148,8 +148,6 @@ const Mailfirst=()=> {
                   border: "1px solid black",
                   borderRadius: "5px",
                   minHeight: "250px",
-                  background:"black",
-                  color:"white",
                 }}
               />
             </Form.Group>
@@ -157,7 +155,7 @@ const Mailfirst=()=> {
               <Button
                 onClick={EmailSubmitHandler}
                 type="button"
-                variant="warning"
+                variant="success"
               >
                 Submit
               </Button>{" "}

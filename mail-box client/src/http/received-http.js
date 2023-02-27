@@ -10,12 +10,13 @@ const useReceivedDataHttp = () => {
     setInterval(() => {
       axios
         .get(
-          `https://data-edd3c-default-rtdb.firebaseio.com/${email}/received.json`
+          `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${email}/received.json`
         )
         .then((res) => {
           setMails(res.data);
         })
-        .catch((err) => {});
+        .catch((err) => {
+        });
     }, 2000);
   }, [email]);
 
@@ -25,6 +26,7 @@ const useReceivedDataHttp = () => {
 
   const result = Object.values(resmails);
   result.reverse();
+
   return result;
 };
 

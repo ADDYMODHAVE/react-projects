@@ -3,7 +3,7 @@
   width: 95%;
   max-width: 25rem;
   border-radius: 6px;
-  background-color: black;
+  background-color:dark;
   box-shadow: 1px 1px 10px rgba(189, 15, 15, 0.2);
   padding: 1rem;
   text-align: center;
@@ -12,7 +12,7 @@
 
 .auth h1 {
   text-align: center;
-  color:whitesmoke;
+  color: rgb(0, 0, 0);
 }
 
 .control {

@@ -17,7 +17,7 @@ const AllEmails = (props) => {
   const handleShow = () => {
   
     fetch(
-      `https://data-edd3c-default-rtdb.firebaseio.com/${email}/received/${id}.json`,
+      `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${email}/received/${id}.json`,
       {
         method: "PATCH",
         body: JSON.stringify({
@@ -29,7 +29,7 @@ const AllEmails = (props) => {
   };
   const handleClose1 = () => {
     fetch(
-      `https://data-edd3c-default-rtdb.firebaseio.com/${email}/received/${id}.json`,
+      `https://data-edd3c-default-rtdb.firebaseio.com/email-box/${email}/received/${id}.json`,
       {
         method: "DELETE",
       }
@@ -41,7 +41,7 @@ const AllEmails = (props) => {
 
   //////////=====working with modals
 
-  let seenCheck = checkread === true ? "💥💥💥" : " ";
+  let seenCheck = checkread === true ? "🔵 " : " ";
  
   return (
     <Fragment>
